@@ -1,0 +1,52 @@
+21.16 19.3.2022
+
+words.txt from https://gist.github.com/colmmacc/5783eb809f5714c30d8a8ee759e0af59
+
+C
+=
+Read words.txt into a 2-d table (otec.pdf, p. 113)
+Read user input
+Go through every word in the table (=copy it to a string variable Candidate) and compare it to the input.
+-if it's a match, copy the word into output table
+Comparison (=filtering):
+ 1. Check for correct letters in correct slots. If there's no match, move to the next word.
+ 2. Check for wrong letters in any slot. If there's a match, move to the next word.
+ 3. Check for correct letters in wrong slots:
+    -if the letter is in the wrong slot, move to the next word.
+    -if the letter is missing, move to the next word. Careful if the same letter occurs twice!
+ 4. Copy the word to the output table.
+Show the contents of the table.
+
+Filtering algorithm
+1. Correct letter in correct slot
+-info: letter and slot number
+-if Candidate[slot-1]!=letter, move to the next word.
+2. Wrong letter
+-info: letter
+-for int i = 0 to 4: if Candidate[i]==letter, move to the next word.
+3. Correct letter in wrong slot
+-info: letter and slot number
+-if Candidate[slot-1]==letter, move to the next word.
+-for int i = 0 to 4: if i == one of the slots in case 1 (=this letter but green) or one of the slots already stored in case 3 (=another yellow instance of this letter), next i. If Candidate[i]==letter, raise a flag and store this slot number. After the loop, if flag is not up, move to the next word.
+
+User input format
+letter number [letter*]
+letter = letter
+number = slot. If number > 0, letter is green. If number < 0, letter is yellow
+[letter*] = letter does not occur in word
+E.g.
+atone
+gy---
+is input as
+a1t-2[one]
+meaning: a occurs at 1; t occurs somewhere other than 2; o, n, e don't occur
+E.g.
+alarm
+y-y--
+a-1a-3[lrm]
+
+Python
+======
+The same, except
+-use something else for storing words.txt
+-use regexps for filtering words

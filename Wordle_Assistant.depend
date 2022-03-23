@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1648065072 source:d:\simo\wordle_assistant\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
