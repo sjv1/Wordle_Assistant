@@ -2,40 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-char * lueKunnes(FILE *virta, char erotin, size_t *pituus)
-{
-    size_t kap = 1;
-    char* puskuri = malloc(kap);
-    size_t pit = 0;
-    int c = 0;
-    c = fgetc(virta);
-    while ((c != erotin) && (c != EOF))
-    {
-        if (pit == kap)
-        {
-            kap *= 2;
-            puskuri = realloc(puskuri, kap);
-        }
-        puskuri[pit] = c;
-        pit++;
-        c = fgetc(virta);
-    }
-    if (pit > 0 || c == erotin)
-    {
-        puskuri = realloc(puskuri, pit+1);
-        puskuri[pit] = '\0';  /*puskurin viimeinen varattu muistipaikka*/
-    }
-    else
-    {
-        puskuri = realloc(puskuri, 0);
-    }
-    *pituus = pit;
-    return puskuri;
-}
+enum {
+    count = 2315,
+    len = 5
+};
 
-
-
-void readWords(char words[2315][6])
+void readWords(char words[count][len+1])
 {
     FILE *wordfile = fopen("words.txt", "r");
     char list[100000];
@@ -46,7 +18,7 @@ void readWords(char words[2315][6])
     int j = 0;
     for(word = strtok(list, " "); word != NULL; word = strtok(NULL, " "))
     {
-        for(j = 0; j < 6; j++)
+        for(j = 0; j < len+1; j++)
         {
             words[i][j] = word[j];
         }
@@ -57,12 +29,12 @@ void readWords(char words[2315][6])
 
 int main()
 {
-    char words[2315][6];
+    char words[count][len+1];
     readWords(words);
     int i = 0;
-    for(i = 0; i < 2315; i++)
+    for(i = 0; i < count; i++)
     {
-        printf("%s\n", words[i]);
+        printf("%s ", words[i]);
     }
     return 0;
 }
