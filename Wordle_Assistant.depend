@@ -4,8 +4,18 @@
 	<stdlib.h>
 	<string.h>
 
-1648065904 source:d:\simo\git\wordle_assistant\main.c
+1650227534 source:d:\simo\git\wordle_assistant\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"list.h"
+
+1650227637 d:\simo\git\wordle_assistant\list.h
+	<stddef.h>
+
+1650227490 source:d:\simo\git\wordle_assistant\list.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"list.h"
 
