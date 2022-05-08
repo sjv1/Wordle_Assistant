@@ -58,24 +58,25 @@ void wl_print(const WordList *wl)
   }
 }
 
-void wl_pruneGreen(WordList *wl, char* greens)
+void wl_pruneList(WordList *wl, char* letters, char* colour)
 {
   WordNode *s;
   WordNode *previousWord = wl->head;
-  int i;
   bool removeThis;
   for(s = wl->head; s != NULL; s = s->next)
   {
       removeThis = false;
-      for(i=0; i<strlen(greens)-1; i=i+2)
+      if(strcmp(colour, "green") == 0)
       {
-        char letter = greens[i];
-        int pos = (int)(greens[i+1])-49;
-        if(s->word[pos] != letter)
-        {
-            removeThis = true;
-            break;
-        }
+          removeThis = wl_pruneGreen(s->word, letters);
+      }
+      else if(strcmp(colour, "yellow") == 0)
+      {
+        //for each each letter-pos pair, go through shortlist and remove every word that has that letter in that pos or that does not contain that letter
+      }
+      else if (strcmp(colour, "grey") == 0)
+      {
+        //for each each letter-pos pair, go through shortlist and remove every word that contains that letter
       }
       if(removeThis == true)
       {
@@ -99,6 +100,21 @@ void wl_pruneGreen(WordList *wl, char* greens)
           previousWord = s;
       }
   }
+}
+
+bool wl_pruneGreen(char* word, char* greens)
+{
+    int i;
+    for(i=0; i<strlen(greens)-1; i=i+2)
+    {
+        char letter = greens[i];
+        int pos = (int)(greens[i+1])-49;
+        if(word[pos] != letter)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /*

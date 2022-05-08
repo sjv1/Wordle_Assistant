@@ -54,7 +54,7 @@ void greenCheck(WordList *shortlist)
         }
         if(prune)
         {
-            wl_pruneGreen(shortlist, greens);
+            wl_pruneList(shortlist, greens, "green");
             printf("shortlist has %d items\n", shortlist->n);
             if(shortlist->n < 20)
             {
@@ -74,12 +74,8 @@ void run(char words[count][len+1])
     {
         greenCheck(shortlist);
     /*
-    read yellow letters in the same format, e.g. g2g3s1s2
-    for each each letter-pos pair, go through shortlist and remove every word that has that letter in that pos-1 or that does not contain that letter
-    read grey letters as a list, e.g. irthdw
-    for each each letter-pos pair, go through shortlist and remove every word that contains that letter
-    output shortlist
-    read continue
+    call yellowCheck: read yellow letters in the same format as green ones, e.g. g2g3s1s2
+    cell greyCheck: read grey letters as a list, e.g. irthdw
     */
         printf("Continue (y/n)?");
         cont = fgetc(stdin);

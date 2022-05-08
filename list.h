@@ -39,7 +39,9 @@ void wl_delete(WordList *wl);
 
 void wl_print(const WordList *wl);
 
-void wl_pruneGreen(WordList *wl, char* greens);
+void wl_pruneList(WordList *wl, char* greens, char*);
+
+bool wl_pruneGreen(char*, char*);
 
 /*char * wl_alkio(const WordList *wl, size_t i);*/
 
