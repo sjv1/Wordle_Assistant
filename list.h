@@ -1,4 +1,8 @@
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 
 enum {
     count = 2315,
@@ -35,7 +39,7 @@ void wl_delete(WordList *wl);
 
 void wl_print(const WordList *wl);
 
-void populate(WordList *wl, char words[count][len+1]);
+void wl_pruneGreen(WordList *wl, char* greens);
 
 /*char * wl_alkio(const WordList *wl, size_t i);*/
 

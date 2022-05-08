@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 #include "list.h"
 
 WordNode * wd_create(char* word, WordNode *next)
@@ -58,8 +56,51 @@ void wl_print(const WordList *wl)
   {
     printf(" %s", s->word);
   }
-  printf("\nDone.\n");
 }
+
+void wl_pruneGreen(WordList *wl, char* greens)
+{
+  WordNode *s;
+  WordNode *previousWord = wl->head;
+  int i;
+  bool removeThis;
+  for(s = wl->head; s != NULL; s = s->next)
+  {
+      removeThis = false;
+      for(i=0; i<strlen(greens)-1; i=i+2)
+      {
+        char letter = greens[i];
+        int pos = (int)(greens[i+1])-49;
+        if(s->word[pos] != letter)
+        {
+            removeThis = true;
+            break;
+        }
+      }
+      if(removeThis == true)
+      {
+          //if this is the first word in the list,
+          if(previousWord == s)
+          {
+              //update list head:
+              wl->head = s->next;
+              //move both previousWord and s to point to the next word:
+              previousWord = s->next;
+          }
+          else
+          {
+              previousWord->next = s->next;
+          }
+          free(s);
+          wl->n -= 1;
+      }
+      else
+      {
+          previousWord = s;
+      }
+  }
+}
+
 /*
 double dl_alkio(const DblLista *lista, size_t i)
 {

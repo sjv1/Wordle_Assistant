@@ -4,18 +4,20 @@
 	<stdlib.h>
 	<string.h>
 
-1650227534 source:d:\simo\git\wordle_assistant\main.c
+1652011600 source:d:\simo\git\wordle_assistant\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<ctype.h>
 	"list.h"
 
-1650227637 d:\simo\git\wordle_assistant\list.h
+1652009940 d:\simo\git\wordle_assistant\list.h
 	<stddef.h>
-
-1650227490 source:d:\simo\git\wordle_assistant\list.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<stdbool.h>
+
+1652011397 source:d:\simo\git\wordle_assistant\list.c
 	"list.h"
 
