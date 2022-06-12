@@ -33,34 +33,70 @@ void readWords(char words[count][len+1])
     return;
 }
 
-void greenCheck(WordList *shortlist)
+void check(WordList *shortlist, char* colour)
 {
-    char greens[15];
+    char input[15];
     int i;
     bool prune = true;
-    printf("Give green letters in a format where each letter is followed by its position, e.g. g1s4s5:\n");
-    fgets(greens, 15, stdin);
+    printf("Give %s letters in a format where each letter is followed by its position, e.g. g1s4s5:\n", colour);
+    fgets(input, 15, stdin);
     fflush(stdin);
-    if(greens != NULL)
+    if(input != NULL)
     {
-        for(i=0; i<strlen(greens)-1; i=i+2)
+        for(i=0; i<strlen(input)-1; i=i+2)
         {
-            if(!(isalpha(greens[i]) || isdigit(greens[i+1]))) //better: check that 0<greens[i+1]<6
+            if(!(isalpha(input[i]) && isdigit(input[i+1]))) //better: check that 0<input[i+1]<6
             {
-                printf("Cannot parse input: %c%c. The input must consist of letter-number pairs.\n", greens[i], greens[i+1]);
+                printf("Cannot parse input: %c%c. The input must consist of letter-number pairs.\n", input[i], input[i+1]);
                 prune = false;
                 break;
             }
         }
         if(prune)
         {
-            wl_pruneList(shortlist, greens, "green");
-            printf("shortlist has %d items\n", shortlist->n);
+            wl_pruneList(shortlist, input, colour);
+            printf("shortlist has %d items", shortlist->n);
             if(shortlist->n < 20)
             {
+                printf(":\n");
                 wl_print(shortlist);
-                printf("\n");
+
             }
+            printf("\n");
+        }
+    }
+}
+
+void checkGrey(WordList *shortlist)
+{
+    char input[15];
+    int i;
+    bool prune = true;
+    printf("Give grey letters in without any position, e.g. gls:\n");
+    fgets(input, 15, stdin);
+    fflush(stdin);
+    if(input != NULL)
+    {
+        for(i=0; i<strlen(input)-1; i=i+1)
+        {
+            if(!(isalpha(input[i])))
+            {
+                printf("Cannot parse input: %c. The input must contain only letters.\n", input[i]);
+                prune = false;
+                break;
+            }
+        }
+        if(prune)
+        {
+            wl_pruneList(shortlist, input, "grey");
+            printf("shortlist has %d items", shortlist->n);
+            if(shortlist->n < 20)
+            {
+                printf(":\n");
+                wl_print(shortlist);
+
+            }
+            printf("\n");
         }
     }
 }
@@ -72,14 +108,13 @@ void run(char words[count][len+1])
     populate(shortlist, words);
     while(cont != 'n')
     {
-        greenCheck(shortlist);
-    /*
-    call yellowCheck: read yellow letters in the same format as green ones, e.g. g2g3s1s2
-    cell greyCheck: read grey letters as a list, e.g. irthdw
-    */
+        check(shortlist, "green");
+        check(shortlist, "yellow");
+        checkGrey(shortlist);
         printf("Continue (y/n)?");
         cont = fgetc(stdin);
         fflush(stdin);
+        printf("\n");
     }
     wl_delete(shortlist);
 }
