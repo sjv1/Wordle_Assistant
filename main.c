@@ -72,7 +72,7 @@ void checkGrey(WordList *shortlist)
     char input[15];
     int i;
     bool prune = true;
-    printf("Give grey letters in without any position, e.g. gls:\n");
+    printf("Give grey letters without any position, e.g. gls:\n");
     fgets(input, 15, stdin);
     fflush(stdin);
     if(input != NULL)

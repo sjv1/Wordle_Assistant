@@ -46,9 +46,3 @@ bool wl_pruneGreen(char*, char*);
 bool wl_pruneYellow(char*, char*);
 
 bool wl_pruneGrey(char* word, char* greys);
-
-/*char * wl_alkio(const WordList *wl, size_t i);*/
-
-/*WordNode * wl_add(WordList *wl, size_t i, double arvo);*/
-
-/*char * wl_delete(WordList *wl, size_t i);*/
