@@ -1,3 +1,4 @@
+//Copyright (c) Simo Voutilainen 2022
 
 #include "list.h"
 
